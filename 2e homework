@@ -1,0 +1,30 @@
+import math
+import random
+
+def rand():
+    print(random.uniform(-1,1))
+    
+def distance(x, y):
+    if len(x) != len(y):
+        return "x and y do not have the same length!"
+    else:
+        square_differences = [(x[i] - y[i])**2 for i in range(len(x))]
+        return math.sqrt(sum(square_differences))
+
+def in_circle(x, origin = [0,0]):
+    if len(x) != 2:
+        return "x is not two-dimensional!"
+    elif distance(x, origin) < 1:
+        return True
+    else:
+        return False
+
+random.seed(1) 
+
+inside = []
+R = 10000
+for i in range(R):
+    point = [rand(),rand()]
+    inside.append(in_circle(point))
+
+print(sum(inside) / R)
